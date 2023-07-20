@@ -1,6 +1,6 @@
 {
   "name": "hurdak",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": false,
   "description": "A handy utility library to complement ramda.js",
   "repository": {
@@ -21,6 +21,7 @@
   ],
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
