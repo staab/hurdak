@@ -8,9 +8,9 @@ export default <Args extends any[]>(t: number, f: (...args: Args) => void) => {
     args = thisArgs
 
     if (!timeout) {
-      timeout = setTimeout(() => {
+      timeout = setTimeout(async () => {
+        await f(...args)
         timeout = null
-        f(...args)
       }, t)
     }
   }
