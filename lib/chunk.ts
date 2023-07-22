@@ -1,6 +1,4 @@
-import {curryN} from "ramda"
-
-export default curryN(2, <T>(chunkLength: number, coll: T[]) => {
+export default <T>(chunkLength: number, coll: T[]) => {
   const result: T[][] = []
   let current: T[] = []
 
@@ -20,4 +18,4 @@ export default curryN(2, <T>(chunkLength: number, coll: T[]) => {
   }
 
   return result
-})
+}

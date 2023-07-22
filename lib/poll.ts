@@ -1,4 +1,4 @@
-export default <T>(f: () => T, t = 100) =>
+export default <T>(t = 100, f: () => T) =>
   new Promise((resolve) => {
     ;(function tryIt() {
       const r = f()

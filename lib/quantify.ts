@@ -1,4 +1,4 @@
-import pluralize from './pluralize'
+import pluralize from "./pluralize"
 
-export default (n: number, label: string, pluralLabel: string) =>
+export default (n: number, label: string, pluralLabel?: string) =>
   `${n} ${pluralize(n, label, pluralLabel)}`

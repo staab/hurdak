@@ -6,7 +6,7 @@ describe("poll", () => {
     let condition = false
     let success = false
 
-    poll(() => condition, 5).then(() => {
+    poll(5, () => condition).then(() => {
       success = true
     })
 

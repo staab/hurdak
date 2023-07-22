@@ -1,3 +1,3 @@
 import {sortBy} from "ramda"
 
-export default sortBy(() => Math.random() > 0.5)
+export default <T>(xs: T[]): T[] => sortBy(() => Math.random() > 0.5, xs)

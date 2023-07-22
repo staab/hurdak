@@ -1,7 +1,9 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
+
 import {curryN} from "ramda"
 
-export default curryN(2, <T>(f: (v: T) => boolean, x: Record<string, T>) => {
-  const r = {} as Record<string, T>
+export default curryN(2, (f: (v: any) => boolean, x: Record<string, any>) => {
+  const r = {} as Record<string, any>
 
   for (const k in x) {
     if (f(x[k])) {
