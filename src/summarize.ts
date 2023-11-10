@@ -16,7 +16,7 @@ const summarize = (target: any, depth = 4): string => {
   }
 
   if (is(Object, target)) {
-    const pairs = []
+    const pairs: string[] = []
 
     for (const k in target) {
       pairs.push(`${k}: ${summarize(target[k], depth - 1)}`)

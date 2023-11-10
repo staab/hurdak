@@ -1,6 +1,6 @@
 export default <T>(t = 100, f: () => T) =>
   new Promise((resolve) => {
-    ;(function tryIt() {
+    (function tryIt() {
       const r = f()
 
       if (r) {

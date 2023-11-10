@@ -2,7 +2,7 @@
 
 export default <Args extends any[]>(t: number, f: (...args: Args) => void) => {
   let args: Args
-  let timeout: number | null
+  let timeout: number | NodeJS.Timeout | null
 
   return (...thisArgs: Args) => {
     args = thisArgs

@@ -1,2 +1,1 @@
---ignore-dir=es
---ignore-dir=dist
+--ignore-dir=build

@@ -31,6 +31,14 @@ const schemaError = (code, path, extra) => ({code, path, ...extra})
 // Schema/Types
 
 class Schema {
+  type?: string
+  closed?: boolean
+  minLength?: number
+  requiredKeys?: string[]
+  requiredValues?: string[]
+  properties?: Record<string, any>
+  items?: Schema
+
   constructor(type, meta = {}) {
     Object.assign(this, {type, ...meta})
   }
@@ -38,7 +46,12 @@ class Schema {
 
 const allTypes = {}
 
-const defType = (name, {typeIsValid, iterTypeErrors}) => {
+type TypeOpts = {
+  typeIsValid: (x: any) => boolean
+  iterTypeErrors?: (schema: Schema, data: any, path: Array<string | number>) => Iterable<any>
+}
+
+const defType = (name, {typeIsValid, iterTypeErrors}: TypeOpts) => {
   allTypes[name] = {
     name,
     schema: new Schema(name),
@@ -81,6 +94,7 @@ const cloneSchema = (schema, meta) => {
 // Error codes
 
 const ERROR_CODE = {
+  EXTRA_KEY: "schema/extra-key",
   TYPE_ERROR: "schema/type-error",
   MISSING_KEY: "schema/missing-key",
   MISSING_VALUE: "schema/missing-value",
@@ -222,7 +236,7 @@ defType("obj", {
 
     for (const k in schema.properties || {}) {
       if (!isNil(data[k])) {
-        for (const error of iterErrors(schema.properties[k], data[k], path.concat(k))) {
+        for (const error of iterErrors(schema.properties?.[k], data[k], path.concat(k))) {
           yield error
         }
       }
@@ -230,7 +244,7 @@ defType("obj", {
 
     if (schema.closed) {
       for (const k in data) {
-        if (!schema.properties[k]) {
+        if (!schema.properties?.[k]) {
           yield schemaError(ERROR_CODE.EXTRA_KEY, path.concat(k), {
             expected: "undefined",
             actual: reprType(data[k]),
@@ -251,7 +265,7 @@ export default new Proxy(
     closed: (schema) => cloneSchema(schema, {closed: true}),
     strict: (schema) => {
       const normalizedSchema = normalize(schema)
-      const requiredKeys = Object.keys(normalizedSchema.properties)
+      const requiredKeys = Object.keys(normalizedSchema.properties!)
 
       return cloneSchema(normalizedSchema, {requiredKeys})
     },
@@ -260,6 +274,8 @@ export default new Proxy(
   },
   {
     get(target, name) {
+      name = String(name)
+
       if (target[name]) {
         return target[name]
       }

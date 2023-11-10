@@ -4,7 +4,6 @@
 .vscode/
 docs/
 node_modules/
-lib/
 src/
 
 .gitignore

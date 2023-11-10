@@ -1,6 +1,6 @@
 {
   "name": "hurdak",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "private": false,
   "description": "A handy utility library to complement ramda.js",
   "repository": {
@@ -10,56 +10,44 @@
   "keywords": [
     "utility"
   ],
+  "type": "module",
   "author": "Jon Staab",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/staab/hurdak/issues"
   },
   "homepage": "https://github.com/staab/hurdak",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
+  "types": "./build/src/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js",
-      "default": "./dist/index.es.js"
-    }
+      "import": "./build/src/index.mjs",
+      "require": "./build/src/index.cjs"
+    },
+    "./types": "./build/src/index.d.ts"
   },
   "scripts": {
-    "check:test": "NODE_ENV=test mocha --compilers js:@babel/register --colors ./test/**/*.test.js",
-    "check:lint": "eslint lib",
-    "check:fmt": "prettier --check $(git diff head --name-only --diff-filter d | grep -E 'js|ts$' | xargs)",
-    "check": "run-p check:*",
-    "format": "prettier --write $(git diff head --name-only --diff-filter d | grep -E 'js|ts$' | xargs)",
-    "build": "tsc && vite build",
-    "prepare": "husky install"
+    "pub": "npm i && npm run lint && tsc-multi && npm publish",
+    "build": "tsc-multi",
+    "clean": "gts clean",
+    "test": "NODE_ENV=test mocha --colors ./test/**/*.test.js",
+    "lint": "gts lint",
+    "fix": "gts fix",
+    "prepare": "yarn run build",
+    "pretest": "yarn run build",
+    "posttest": "yarn run lint"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.9",
-    "@babel/plugin-transform-runtime": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
-    "@babel/register": "^7.22.5",
-    "@babel/runtime": "^7.22.6",
-    "@rollup/plugin-typescript": "^8.3.0",
-    "@types/ramda": "^0.29.3",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
-    "chai": "3.5.0",
-    "eslint": "^8.45.0",
-    "eslint-loader": "1.7.1",
-    "husky": "^8.0.3",
-    "mocha": "3.3.0",
+    "@types/node": "20.4.6",
+    "@types/ramda": "^0.29.8",
+    "chai": "^4.3.10",
+    "gts": "^5.0.1",
+    "mocha": "^10.2.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.0.0",
-    "tslib": "^2.3.1",
-    "typescript": "^5.1.6",
-    "vite": "^2.7.2"
+    "onchange": "^7.1.0",
+    "tsc-multi": "^1.1.0",
+    "typescript": "~5.1.6"
   },
   "dependencies": {
-    "ramda": "^0.29.0"
+    "ramda": "^0.29.1"
   }
 }

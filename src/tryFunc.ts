@@ -4,7 +4,7 @@ import {is} from "ramda"
 
 export default function tryFunc<T>(
   f: () => T | void,
-  onError: (e?: any) => void = (_) => {}
+  onError: (e?: any) => void = (_) => undefined
 ): Promise<T | null> | T | null {
   try {
     const r = f()
