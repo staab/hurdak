@@ -1,6 +1,6 @@
 {
   "name": "hurdak",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "private": false,
   "description": "A handy utility library to complement ramda.js",
   "repository": {
@@ -20,11 +20,14 @@
   "types": "./build/src/index.d.ts",
   "exports": {
     ".": {
+      "types": "./build/src/index.d.ts",
       "import": "./build/src/index.mjs",
       "require": "./build/src/index.cjs"
-    },
-    "./types": "./build/src/index.d.ts"
+    }
   },
+  "files": [
+    "build"
+  ],
   "scripts": {
     "pub": "npm i && npm run lint && tsc-multi && npm publish",
     "build": "tsc-multi",
