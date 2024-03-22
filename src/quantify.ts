@@ -1,4 +1,5 @@
 import pluralize from "./pluralize"
+import commaFormat from "./commaFormat"
 
 export default (n: number, label: string, pluralLabel?: string) =>
-  `${n} ${pluralize(n, label, pluralLabel)}`
+  `${commaFormat(n)} ${pluralize(n, label, pluralLabel)}`

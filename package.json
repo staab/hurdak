@@ -1,6 +1,6 @@
 {
   "name": "hurdak",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": false,
   "description": "A handy utility library to complement ramda.js",
   "repository": {
