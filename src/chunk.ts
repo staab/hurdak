@@ -1,15 +1,12 @@
 export default <T>(chunkLength: number, coll: T[]) => {
   const result: T[][] = []
-  let current: T[] = []
+  const current: T[] = []
 
   coll.forEach((item: T) => {
     if (current.length < chunkLength) {
       current.push(item)
-    }
-
-    if (current.length === chunkLength) {
-      result.push(current)
-      current = []
+    } else {
+      result.push(current.splice(0))
     }
   })
 
