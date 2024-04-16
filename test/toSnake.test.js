@@ -6,5 +6,6 @@ describe("toSnake", () => {
     assert.equal(toSnake("DEEF__ huur dee-dumP"), "deef_huur_dee_dump")
     assert.equal(toSnake("30f"), "30f")
     assert.equal(toSnake("30F"), "30f")
+    assert.equal(toSnake("SymDiff"), "sym_diff")
   })
 })
